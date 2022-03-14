@@ -1,0 +1,31 @@
+<html>
+    <head>
+      <title>WebScraping</title>
+      <link rel="stylesheet" href="Styles.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	</head>
+	<body>
+        <h1 align="center">Berita Terkini</h1>
+        <div id="headline_json"></div>
+	</body>
+    <script type="text/javascript">
+    $(function(){
+        $.get('BeautifulSoup2.json', function(obj){
+            // Pisahkan \n yang menjadi batas antar headline (newline)
+            var str = "<table border=1>";
+
+            str+="<tr><td><b>No</b></td><td><b>Judul Headline</b></td><td><b>Kategori</b></td><td><b>Waktu Upload</b></td><td><b>Tanggal Scrapping</b></td></tr>";
+            $.each(obj, function(n, data){
+                str+="<tr><td>"+(n+1)+"</td>";
+                str+="<td>"+data.judul+"</td>";
+                str+="<td>"+data.kategori+"</td>";
+                str+="<td>"+data.waktu_publish+"</td>";
+                str+="<td>"+data.waktu_scraping+"</td></tr>";
+            });
+            //Display semua headline ke html dengan id=headline_teks
+            str+="</table>";
+            $('#headline_json').html(str);
+        });
+    });
+    </script>
+</html>
